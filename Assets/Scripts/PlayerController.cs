@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 10f;  // 이동 속도
+    public float speed = 8f;  // 이동 속도
     private Rigidbody playerRigidbody;  // Rigidbody 변수
 
     // Start는 처음 한 번 실행됨
@@ -38,5 +38,20 @@ public class PlayerController : MonoBehaviour
             // 왼쪽 방향키 입력이 감지된 경우 -x 방향으로 힘 가하기
             playerRigidbody.AddForce(-speed, 0f, 0f);
         }
+    }
+
+    void Update()
+    {
+        float xInput = xInput.GetAxis("Horizontal");
+        Debug.Log("xInput: " + xInput);
+
+        float zInput = Input.GetAxis("Vertical");
+        Debug.Log("zInput: " + zInput);
+
+        float xSpeed = xInput * speed;
+        float zSpeed = zInput * speed;
+
+        vector3 newVelocity = new Vector3(xSpeed, 0f, zSpeed);
+        playerRigidbody.linderVelocity = newVelocity;
     }
 }

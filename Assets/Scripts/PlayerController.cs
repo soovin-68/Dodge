@@ -39,4 +39,13 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.AddForce(-speed, 0f, 0f);
         }
     }
+
+    public void Die()
+    {
+        // 자신의 게임 오브젝트를 비활성화
+        gameObject.SetActive(false);
+        GameManager gameManager = FindFirstObjectByType<GameManager>();
+        // 가져온 GameManager 오브젝트의 EndGame() 매서드 실행
+        gameManager.EndGame();
+    }
 }

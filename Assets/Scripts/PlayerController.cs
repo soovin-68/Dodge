@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 8f;  // 이동 속도
+    public float speed = 10f;  // 이동 속도
     private Rigidbody playerRigidbody;  // Rigidbody 변수
 
     // Start는 처음 한 번 실행됨
@@ -40,18 +40,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update()
+    public void Die()
     {
-        float xInput = xInput.GetAxis("Horizontal");
-        Debug.Log("xInput: " + xInput);
-
-        float zInput = Input.GetAxis("Vertical");
-        Debug.Log("zInput: " + zInput);
-
-        float xSpeed = xInput * speed;
-        float zSpeed = zInput * speed;
-
-        vector3 newVelocity = new Vector3(xSpeed, 0f, zSpeed);
-        playerRigidbody.linderVelocity = newVelocity;
+        // 자신의 게임 오브젝트를 비활성화
+        gameObject.SetActive(false);
+        GameManager gameManager = FindFirstObjectByType<GameManager>();
+        // 가져온 GameManager 오브젝트의 EndGame() 매서드 실행
+        gameManager.EndGame();
     }
 }

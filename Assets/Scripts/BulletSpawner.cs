@@ -20,7 +20,7 @@ public class BulletSpawner : MonoBehaviour
         spawnRate = Random.Range(spawnRateMin, spawnRateMax);
         // playerController 컴폰전트를 가진 게임 오브젝트를 찾아 조준 대상으로 설정
         target = FindFirstObjectByType<PlayerController>().transform;
-        spawnSound = GetComponent<AudioSource>();
+        spawnSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -31,7 +31,7 @@ public class BulletSpawner : MonoBehaviour
         //최근 생성 시점에서부터 누적된 시간이, 생성 주기보다 크거나 같아면
         if (timeAfterSpawn >= spawnRate)
         {
-            spawnSound.PlayOneShot(spawnClip);
+            spawnSource.PlayOneShot(spawnClip);
             //누적된 시간을 리셋
             timeAfterSpawn = 0f;
             //bulletPrefab의 복사본을
